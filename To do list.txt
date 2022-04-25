@@ -1,0 +1,10 @@
+To do:
+    Learn:
+        Python
+        C#
+        JAVA
+        ...
+
+    Work on:
+        Python Crash course
+        
