@@ -1,9 +1,13 @@
 To do:
     Learn:
         Python
+            make a game
+            cypto trader
         C#
         JAVA
-        ...
+        CSS
+            Odin project
+        HTML
 
     Work on:
         Python Crash course
