@@ -8,7 +8,7 @@ users = {
     'mcurie': {
         'first': 'marie',
         'last': 'curie',
-        'location': 'paris',
+        'location': 'london',
     }
 }
 
