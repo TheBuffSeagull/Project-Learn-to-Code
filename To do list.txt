@@ -1,6 +1,10 @@
-To do:
+To do list:
+
+
+To do Coding:
     Learn:
         Python
+            finish python_crash_course
             make a game
             cypto trader
         C#
