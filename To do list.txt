@@ -1,5 +1,4 @@
 To do list:
-    Where does modules download from
 
 
 To do Coding:
@@ -8,11 +7,12 @@ To do Coding:
             finish python_crash_course
             make a game
             cypto trader
+        HTML
         C#
         JAVA
         CSS
             Odin project
-        HTML
+        
 
     Work on:
         Python Crash course
