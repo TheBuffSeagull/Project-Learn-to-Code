@@ -1,0 +1,7 @@
+HTML NOTES:
+    HyperText markup lanaguage
+
+    Charset="utf-8
+        tells the browser what letter set were using
+    
+    
