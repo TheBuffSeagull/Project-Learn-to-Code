@@ -1,5 +1,8 @@
 # A class is a set of instructions for how to make an instance
 # see line 21
+from operator import attrgetter
+
+
 class Dog:
     """A simple attempt to model a dog."""
 
