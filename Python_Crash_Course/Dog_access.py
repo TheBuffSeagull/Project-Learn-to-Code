@@ -1,4 +1,4 @@
 import dog as Dog
 
 
-print(Dog("Willie", 6))
+print(Dog.sit("Willie", 6))
