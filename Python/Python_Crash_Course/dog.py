@@ -1,8 +1,5 @@
 # A class is a set of instructions for how to make an instance
 # see line 21
-from operator import attrgetter
-
-
 class Dog:
     """A simple attempt to model a dog."""
 
@@ -23,8 +20,13 @@ class Dog:
 
 # We can use this one to make individual instances represeting specific dogs
 my_dog = Dog("Willie", 6)
+your_dog = Dog('peaches', 4)
 
 print(f"My Dog's name is {my_dog.name}.")
-print(f"My dog {my_dog.age} years old.")
+print(f"My dog {my_dog.age} years old.\n")
+
+print(f"Your Dog's name is {your_dog.name}.")
+print(f"My dog {your_dog.age} years old.\n")
 
 print(Dog.sit(my_dog))
+print(Dog.sit(your_dog))
