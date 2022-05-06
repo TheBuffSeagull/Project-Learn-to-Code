@@ -5,7 +5,6 @@ To do Coding:
     Learn:
         Python
             finish python_crash_course
-            make a game
             cypto trader
         HTML
         C#
@@ -13,7 +12,4 @@ To do Coding:
         CSS
             Odin project
         
-
-    Work on:
-        Python Crash course
         

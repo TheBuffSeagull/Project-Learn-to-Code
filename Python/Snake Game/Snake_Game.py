@@ -5,6 +5,7 @@ import pygame
 import time
 import random
  
+# inits all of pygames functions
 pygame.init()
  
 # setting colors as tuples
@@ -26,29 +27,30 @@ pygame.display.set_caption('Snake Game by TheBuffSeagull')
 clock = pygame.time.Clock()
 
 #snake details
+
 snake_block = 10
-snake_speed = 15
+snake_speed = 10
+
  
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
  
- 
+# Function for score board
 def Your_score(score):
-    value = score_font.render("Your Score: " + str(score), True, blue)
+    value = score_font.render("Your Score: \n" + str(score), True, blue)
     dis.blit(value, [0, 0])
- 
- 
- 
+
+# Function for snake
 def our_snake(snake_block, snake_list):
-    for x in snake_list:
-        pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
- 
- 
+    for i in snake_list:
+        pygame.draw.rect(dis, black, [i[0], i[1], snake_block, snake_block])
+
+# Function for game over message
 def message(msg, color):
     mesg = font_style.render(msg, True, color)
     dis.blit(mesg, [dis_width / 6, dis_height / 3])
  
- 
+# Main game loop
 def gameLoop():
     game_over = False
     game_close = False
@@ -108,7 +110,7 @@ def gameLoop():
         snake_Head.append(x1)
         snake_Head.append(y1)
         snake_List.append(snake_Head)
-        if len(snake_List) > Length_of_snake:
+        if len(snake_List) > Length_of_snake: # len() gets the length of a
             del snake_List[0]
  
         for x in snake_List[:-1]:
@@ -120,15 +122,15 @@ def gameLoop():
  
         pygame.display.update()
  
+        
         if x1 == foodx and y1 == foody:
             foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
             foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
             Length_of_snake += 1
+            
  
         clock.tick(snake_speed)
  
     pygame.quit()
     quit()
- 
- 
 gameLoop()
