@@ -105,7 +105,7 @@ def gameLoop():
         x1 += x1_change
         y1 += y1_change
         dis.fill(white)
-        pygame.draw.rect(dis, green, [foodx, foody, snake_block, snake_block])
+        pygame.draw.rect(dis, blue, [foodx, foody, snake_block, snake_block])
         snake_Head = []
         snake_Head.append(x1)
         snake_Head.append(y1)
