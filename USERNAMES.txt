@@ -1,22 +1,21 @@
-when you put that in
-keep adding new things
+{"ID": ["0002bd2c38944e1e92938ac4e41ce605", "00023e7b99754e53ac45282678fecda2", "000299cd55f44c6b91e8a83e43e2a72b", "0002a17840b841f283aca155b70629e6", "phd", "0002392a3f3e4bef81ed2ed246421d0c", "0002b72f77ab4477b414005ed00ff874", "00020808dd42485eb16202f10a70f653", "ES", "0002d70f9f044150911e20379c690768", "0002246412d44a4ca9ed0515211e9613", "ES", "0002cf8ba06e41e2b9eb4e8666a4ee6b", "0002bd2c38944e1e92938ac4e41ce605", "00023e7b99754e53ac45282678fecda2", "000299cd55f44c6b91e8a83e43e2a72b", "0002a17840b841f283aca155b70629e6", "phd", "0002392a3f3e4bef81ed2ed246421d0c", "0002b72f77ab4477b414005ed00ff874", "00020808dd42485eb16202f10a70f653", "ES", "0002d70f9f044150911e20379c690768", "0002246412d44a4ca9ed0515211e9613", "ES", "0002cf8ba06e41e2b9eb4e8666a4ee6b"], "USERNAME": ["Murasa", "Cuddles_Bandito", "wndl22", "Firedragon128v", "Trainee", "yourdadsmommy", "Murasa", "Cuddles_Bandito", "wndl22", "Firedragon128v", "Trainee", "yourdadsmommy"]}
+{"ID": ["0002bd2c38944e1e92938ac4e41ce605", "0002578775a443c89aecb4a52102b2e5", "GG", "0002973827da4000b0e1321e78aaf305", "GG", "0002512664e54989beae5068416c6e31", "GG", "0002293da77d435daf60bdf991d84894", "0002d547bd6640c18784f04c025321ed", "GG", "0002248ae34346a8b92d29a4d1bd78f2", "0002a1499d604ca49c5412037d4ae672", "0002659535cd42ac93aecac03623b74e", "PAWG", "0002820247a649e7b2f82fc0aaa26692", "CD", "0002e2f00f434124b82436b0c82fb53c", "0002fafda6444d728b0c35d1aeb22a24", "0002ac197ee245b5b0ca6a0d3b17cc57", "GRM", "00028f3ef3ee4500a5de6f2ccdf162a3", "ES", "0002cf8ba06e41e2b9eb4e8666a4ee6b", "0002f525efb44924bc58d4689dc7a408"], "USERNAME": ["rook", "Slong", "Trainee", "Trainee_01", "kouhaaii", "aaron", "Goose"]}
+{"ID": ["0002bd2c38944e1e92938ac4e41ce605", "0002578775a443c89aecb4a52102b2e5", "GG", "0002973827da4000b0e1321e78aaf305", "GG", "0002512664e54989beae5068416c6e31", "GG", "0002293da77d435daf60bdf991d84894", "0002d547bd6640c18784f04c025321ed", "GG", "0002248ae34346a8b92d29a4d1bd78f2", "0002a1499d604ca49c5412037d4ae672", "0002659535cd42ac93aecac03623b74e", "PAWG", "0002820247a649e7b2f82fc0aaa26692", "CD", "0002e2f00f434124b82436b0c82fb53c", "0002fafda6444d728b0c35d1aeb22a24", "0002ac197ee245b5b0ca6a0d3b17cc57", "GRM", "00028f3ef3ee4500a5de6f2ccdf162a3", "ES", "0002cf8ba06e41e2b9eb4e8666a4ee6b", "0002f525efb44924bc58d4689dc7a408"], "USERNAME": ["rook", "Slong", "Trainee", "Trainee_01", "kouhaaii", "aaron", "Goose"]}
+
+
 <indent=2%>"Rookie52-BOT"  [0002bd2c38944e1e92938ac4e41ce605]</indent>
-<indent=2%>"Murasa"  [00023e7b99754e53ac45282678fecda2]</indent>
-<indent=2%>"Cuddles_Bandito"  [000299cd55f44c6b91e8a83e43e2a72b]</indent>
-<indent=2%>"wndl22"  [0002a17840b841f283aca155b70629e6]</indent>
-<indent=2%>"[phd]auxitt"  [0002392a3f3e4bef81ed2ed246421d0c]</indent>
-<indent=2%>"Firedragon128v"  [0002b72f77ab4477b414005ed00ff874]</indent>
-<indent=2%>"Trainee"  [00020808dd42485eb16202f10a70f653]</indent>
-<indent=2%>"AA[ES]AA"  [0002d70f9f044150911e20379c690768]</indent>
-<indent=2%>"yourdadsmommy"  [0002246412d44a4ca9ed0515211e9613]</indent>
-<indent=2%>"[ES]Seagull" <color="orange">[YOU]</color> [0002cf8ba06e41e2b9eb4e8666a4ee6b]
-<indent=2%>"Rookie52-BOT"  [0002bd2c38944e1e92938ac4e41ce605]</indent>
-<indent=2%>"Murasa"  [00023e7b99754e53ac45282678fecda2]</indent>
-<indent=2%>"Cuddles_Bandito"  [000299cd55f44c6b91e8a83e43e2a72b]</indent>
-<indent=2%>"wndl22"  [0002a17840b841f283aca155b70629e6]</indent>
-<indent=2%>"[phd]auxitt"  [0002392a3f3e4bef81ed2ed246421d0c]</indent>
-<indent=2%>"Firedragon128v"  [0002b72f77ab4477b414005ed00ff874]</indent>
-<indent=2%>"Trainee"  [00020808dd42485eb16202f10a70f653]</indent>
-<indent=2%>"AA[ES]AA"  [0002d70f9f044150911e20379c690768]</indent>
-<indent=2%>"yourdadsmommy"  [0002246412d44a4ca9ed0515211e9613]</indent>
-<indent=2%>"[ES]Seagull" <color="orange">[YOU]</color> [0002cf8ba06e41e2b9eb4e8666a4ee6b]
+<indent=2%>"rook"  [0002578775a443c89aecb4a52102b2e5]</indent>
+<indent=2%>"[GG]LMD"  [0002973827da4000b0e1321e78aaf305]</indent>
+<indent=2%>"[GG]Ryuzaki"  [0002512664e54989beae5068416c6e31]</indent>
+<indent=2%>"[GG]Cautics"  [0002293da77d435daf60bdf991d84894]</indent>
+<indent=2%>"Slong"  [0002d547bd6640c18784f04c025321ed]</indent>
+<indent=2%>"[GG]Angel139"  [0002248ae34346a8b92d29a4d1bd78f2]</indent>
+<indent=2%>"Trainee"  [0002a1499d604ca49c5412037d4ae672]</indent>
+<indent=2%>"Trainee_01"  [0002659535cd42ac93aecac03623b74e]</indent>
+<indent=2%>"[PAWG]exhed"  [0002820247a649e7b2f82fc0aaa26692]</indent>
+<indent=2%>"[CD]Harellan"  [0002e2f00f434124b82436b0c82fb53c]</indent>
+<indent=2%>"kouhaaii"  [0002fafda6444d728b0c35d1aeb22a24]</indent>
+<indent=2%>"aaron"  [0002ac197ee245b5b0ca6a0d3b17cc57]</indent>
+<indent=2%>"[GRM]Dantheman"  [00028f3ef3ee4500a5de6f2ccdf162a3]</indent>
+<indent=2%>"[ES]Seagull" <color="orange">[YOU]</color> [0002cf8ba06e41e2b9eb4e8666a4ee6b]</indent>
+<indent=2%>"Goose"  [0002f525efb44924bc58d4689dc7a408]
