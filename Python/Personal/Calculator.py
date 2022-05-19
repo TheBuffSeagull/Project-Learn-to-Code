@@ -50,7 +50,7 @@ def eval_math_expr(expr):
 
 
 if __name__ == '__main__': # easy debugging
-    interactive = True
+    interactive = False
     if interactive:
         expr = input('Enter your expression:')
         print(expr + '=')
