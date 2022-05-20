@@ -2,19 +2,13 @@ from distutils.command.clean import clean
 import PySimpleGUI as sg
 import re
 import json
-import datetime
+import datetime #this is for later
 
 
 idlist = {
 
 }
 
-
-def save_to_file():
-    with open("USERNAMES.txt", "a") as file:
-        file.write('\n')
-        file.write(json.dumps(idlist))
-        print(f"File edited with {idlist}.")
 
 
 def clean_up(paste):
@@ -33,16 +27,17 @@ def ids_for_usernames(ids):
     print('Made it to dictionary')
     
     # no idea why this works just dont fucking touch it... SERIOUSLY.
-    user_names = re.findall('"([^"]*)"', ids)
+    user_names =re.findall('"([^"]*)"', ids) 
     user_IDS = re.findall(r'\s\[(\w+)\]', ids)
     
     return user_IDS, user_names
 
 
-
-def add_values_in_dict(idlist, key, list_of_values):
-    ''' Append multiple values to a key in 
-        the given dictionary '''
+def save_to_file():
+    with open("USERNAMES.txt", "a") as file:
+        file.write('\n')
+        file.write(json.dumps(idlist))
+        print(f"File edited with {idlist}.")
     
 
 
