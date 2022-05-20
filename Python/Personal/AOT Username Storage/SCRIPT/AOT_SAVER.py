@@ -2,11 +2,12 @@ from distutils.command.clean import clean
 import PySimpleGUI as sg
 import re
 import json
+import datetime
 
 
 idlist = {
-    "ID":"USERNAME",
-    }
+
+}
 
 
 def save_to_file():
@@ -31,15 +32,18 @@ def ids_for_usernames(ids):
     """Pulls all of the information out of the brackets"""
     print('Made it to dictionary')
     
-    # no idea why this works just dont fucking touch it
-    user_names = re.findall(r'\>(\w+)\<', ids)
-
-    for applicable_ID in user_names:
-        idlist["ID"].append(applicable_ID)
-
-    print(idlist)
+    # no idea why this works just dont fucking touch it... SERIOUSLY.
+    user_names = re.findall('"([^"]*)"', ids)
+    user_IDS = re.findall(r'\s\[(\w+)\]', ids)
     
+    return user_IDS, user_names
 
+
+
+def add_values_in_dict(idlist, key, list_of_values):
+    ''' Append multiple values to a key in 
+        the given dictionary '''
+    
 
 
 
@@ -70,15 +74,26 @@ while True:
 
         ids = clean_up(paste)
 
-        print(ids)
         print("MADE IT TO IDS\n")
         
-        ids_for_usernames(ids)
+        user_IDS, user_names = ids_for_usernames(ids)
+
+        print("\nPROGRESS SO FAR -----------------")
+
+        print(user_names)
+        print(user_IDS)
 
 
-        save_to_file() 
+        print("\nMAKING DICTIONARY -----------------")
+        # using naive method
+        # to convert lists to dictionary
+        idlist = {user_IDS[i]: user_names[i] for i in range(len(user_IDS))}
 
         print(idlist)
+        
+
+        save_to_file()
+
 
 
 
