@@ -30,10 +30,22 @@ def ids_for_usernames(ids):
     
     return user_IDS, user_names
 
+def read_file():
+    # reading the data from the file
+    with open('USERNAMES.txt', "r") as f:
+        data = f.read()
 
+  
+        print("Data type before reconstruction : ", type(data))
+        
+        # reconstructing the data as a dictionary
+        js = json.loads(data)
+    
+        print("Data type after reconstruction : ", type(js))
+        print(js)
 
 def save_to_file():
-    with open("USERNAMES.txt", "a") as file:
+    with open("USERNAMES.txt", "w") as file:
         file.write('\n')
         file.write(json.dumps(origin_dict))
         print(f"File edited with {origin_dict}.")
@@ -55,6 +67,21 @@ idlist = {user_IDS[i]: user_names[i] for i in range(len(user_IDS))}
 
 print(idlist)
 print(origin_dict)
+
+# reading the data from the file
+with open('USERNAMES.txt', "r") as f:
+    data = f.read()
+
+  
+    print("Data type before reconstruction : ", type(data))
+        
+    # reconstructing the data as a dictionary
+    js = json.loads(data)
+    
+    print("Data type after reconstruction : ", type(js))
+    print(js)
+    origin_dict = js
+
 
 origin_dict.update(idlist)
 

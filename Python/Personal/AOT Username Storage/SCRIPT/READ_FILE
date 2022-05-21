@@ -13,3 +13,5 @@ def read_file():
     
         print("Data type after reconstruction : ", type(js))
         print(js)
+
+read_file()
