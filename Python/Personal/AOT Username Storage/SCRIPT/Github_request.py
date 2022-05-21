@@ -30,18 +30,6 @@ def ids_for_usernames(ids):
     
     return user_IDS, user_names
 
-def read_file():
-    # reading the data from the file
-    with open('USERNAMES.txt') as f:
-        data = f.read()
-  
-    print("Data type before reconstruction : ", type(data))
-      
-    # reconstructing the data as a dictionary
-    js = json.loads(data)
-  
-    print("Data type after reconstruction : ", type(js))
-    print(js)
 
 
 def save_to_file():
@@ -64,7 +52,6 @@ print("\nMAKING DICTIONARY -----------------")
 # to convert lists to dictionary
 idlist = {user_IDS[i]: user_names[i] for i in range(len(user_IDS))}
 
-origin_dict = read_file()
 
 print(idlist)
 print(origin_dict)
