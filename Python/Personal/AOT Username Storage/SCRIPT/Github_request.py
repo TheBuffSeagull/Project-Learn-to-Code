@@ -31,10 +31,18 @@ def ids_for_usernames(ids):
     return user_IDS, user_names
 
 def read_file():
-    with open("USERNAMES.txt", "r") as file:
-        origin_dict = {int(k): v for line in file for (k, v) in [line.strip().split(None, 1)]}
-        print(origin_dict)
-        return origin_dict
+    # reading the data from the file
+    with open('USERNAMES.txt') as f:
+        data = f.read()
+  
+    print("Data type before reconstruction : ", type(data))
+      
+    # reconstructing the data as a dictionary
+    js = json.loads(data)
+  
+    print("Data type after reconstruction : ", type(js))
+    print(js)
+
 
 def save_to_file():
     with open("USERNAMES.txt", "a") as file:
