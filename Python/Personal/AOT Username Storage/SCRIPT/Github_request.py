@@ -3,6 +3,13 @@ import re
 import json
 import os
 
+#update repo for most up to date file
+import git 
+
+g = git.cmd.Git(git_dir)
+g.pull()
+
+
 origin_dict = {}
 idlist = {}
 
