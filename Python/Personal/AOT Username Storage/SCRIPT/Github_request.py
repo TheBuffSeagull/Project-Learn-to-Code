@@ -3,6 +3,7 @@ import re
 import json
 import os
 
+origin_dict = {}
 idlist = {}
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -29,11 +30,18 @@ def ids_for_usernames(ids):
     
     return user_IDS, user_names
 
+def read_file():
+    with open("USERNAMES.txt", "r") as file:
+        origin_dict = {int(k): v for line in file for (k, v) in [line.strip().split(None, 1)]}
+        print(origin_dict)
+        return origin_dict
+
 def save_to_file():
     with open("USERNAMES.txt", "a") as file:
         file.write('\n')
-        file.write(json.dumps(idlist))
-        print(f"File edited with {idlist}.")
+        file.write(json.dumps(origin_dict))
+        print(f"File edited with {origin_dict}.")
+
 
 
 url = 'https://raw.githubusercontent.com/TheBuffSeagull/Project-Learn-to-Code/master/Python/Personal/AOT%20Username%20Storage/AOT_NAMES_DUMP.txt'
@@ -48,6 +56,15 @@ print("\nMAKING DICTIONARY -----------------")
 # to convert lists to dictionary
 idlist = {user_IDS[i]: user_names[i] for i in range(len(user_IDS))}
 
+origin_dict = read_file()
+
 print(idlist)
+print(origin_dict)
+
+origin_dict.update(idlist)
 
 save_to_file()
+
+#Names = True
+#while Names is True:
+#    print(f"Program running....")
