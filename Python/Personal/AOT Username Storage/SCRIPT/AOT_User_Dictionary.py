@@ -36,7 +36,8 @@ def save_to_file(final):
     # reconstructing the data as a dictionary
 
     print("Saving new entries from paste file...")
-    save_file = main_dictionary | final
+    save_file = final
+    print(f"File currently has {len(save_file)} values.\n")
 
     with open("USERNAMES.txt", "w") as f_w:
         f_w.write(json.dumps(save_file))
@@ -55,14 +56,15 @@ def read_from_file():
        # reconstructing the data as a dictionary
 
         print("Reconstructing as dictionary: ", type(main_dictionary))
-        print(f"File currently has {len(main_dictionary)} values.\n")
     
-        #pprint.pprint(main_dictionary)
+        pprint.pprint(main_dictionary)
+        print(f"File currently has {len(main_dictionary)} values.\n")
+        
+        return main_dictionary
 
     except:
         print("Something went wrong...")
 
-    return main_dictionary
 
 def read_paste_file():
     with open('PASTE_DOC.txt', 'r') as f:
@@ -113,20 +115,11 @@ def update_USERNAMES():
 
         if len(user_ID) > 1:
             pprint.pprint(origin_dict)
-        
+
 
         return origin_dict
         
     except Exception as e: print(e)
-
-def remove_badID(input):
-    data = read_from_file()
-    if input in data:
-        del data[input]
-        with open("USERNAMES.txt", "w") as f_w:
-            f_w.write(json.dumps(data))
-        read_from_file()
-    
 
 origin_dict = {}
 used_list = []
@@ -134,43 +127,46 @@ used_list = []
 
 origin_dict = update_USERNAMES()
 
-save_to_file(origin_dict)
-
 dictionary_data = read_from_file()
 
 Active = True
 
-#Main interactive while loop
 while Active:
 
-        string = input("Type an AOT User ID, 'update', 'remove', 'all', or 'exit': ")
+        string = input("Type an AOT User ID, 'update', 'all', 'remove', or 'exit': ")
 
-        if string == "all":
+        if string == "remove":
+            try:
+                print("\nWARNING: REMOVE FUNCTION CLEARS PASTE_DOC. DATA STILL STORED IN USERNAMES.TXT\n")
+                remove_ID = input("Type an ID to remove: ")
+                print(f"Deleting {remove_ID} with names {dictionary_data[remove_ID]}")
+                del dictionary_data[remove_ID]
+                del origin_dict[remove_ID]
+                save_to_file(dictionary_data)
+                with open('PASTE_DOC.txt', 'w') as f_P:
+                    data = f_P.write('')
+            except Exception as e: print(e)
+        
+        
+        if string == "update":
+            try:
+                print(f"Content to update: {origin_dict | dictionary_data}")
+                save_to_file(origin_dict | dictionary_data)
+            except Exception as e: print(e)
+        
+        elif string == "all":
             try:
                 pprint.pprint(dictionary_data)
             except Exception as e: print(e)
-        
-        elif string == "update":
-            try:
-                origin_dict = update_USERNAMES()
-                dictionary_data = read_from_file()
-            except Exception as e: print(e)
+    
+    
 
-        elif string == "remove":
-            try:  
-                badID = input("Enter ID to remove: ")        
-                remove_badID(badID)
-            except Exception as e: print(e)
-            
+
         elif string == "exit":
             Active = False
 
-        elif string in dictionary_data or origin_dict:
-            try:
-                print(dictionary_data[string])
-            except Exception as e: print(e)
+        elif string in dictionary_data:
+            print(dictionary_data[string])
+
+save_to_file(origin_dict)
         
-
-
-
-            
