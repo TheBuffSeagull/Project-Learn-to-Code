@@ -4,7 +4,6 @@ import json
 import os
 
 
-
 origin_dict = {}
 idlist = {}
 
@@ -22,15 +21,16 @@ def clean_up(paste):
     print('MADE IT THROUGH CLEAN UP\n')
     return final_cleaned_up_version
 
-def ids_for_usernames(ids):
+def Usernames(ids):
     """Pulls all of the information out of the brackets"""
     print('Made it to dictionary')
     
-    # no idea why this works just dont fucking touch it... SERIOUSLY.
+    # no idea why this works just dont fucking touch it... SERIOUSLY. 
     user_names = re.findall('"([^"]*)"', ids) 
     user_IDS = re.findall(r'\s\[(\w+)\]', ids)
-    
-    return user_IDS, user_names
+    for _name in user_names:
+        for _ID in user_IDS:
+            return _name, _ID
 
 def read_file():
     # reading the data from the file
@@ -54,22 +54,7 @@ def save_to_file():
 
 
 
-url = 'https://raw.githubusercontent.com/TheBuffSeagull/Project-Learn-to-Code/master/Python/Personal/AOT%20Username%20Storage/AOT_NAMES_DUMP.txt'
-page = requests.get(url)
 
-
-string = clean_up(page.text)
-
-user_IDS, user_names = ids_for_usernames(string)
-
-print("\nMAKING DICTIONARY -----------------")
-# using naive method
-# to convert lists to dictionary
-idlist = {user_IDS[i]: user_names[i] for i in range(len(user_IDS))}
-
-
-print(idlist)
-print(f"current orgin dictionary: {origin_dict}")
 
 # reading the data from the file
 with open('USERNAMES.txt', "r") as f:
@@ -85,19 +70,29 @@ with open('USERNAMES.txt', "r") as f:
     print(js)
     origin_dict = js
 
-print(f"Fusing Dictionaries....")
 
-for user_IDS, user_names in origin_dict:
-    if user_IDS in origin_dict:
-        for key,val in to_add.items():
-            if key in d:
-                d[key] = [d[key],val]
-    
+url = 'https://raw.githubusercontent.com/TheBuffSeagull/Project-Learn-to-Code/master/Python/Personal/AOT%20Username%20Storage/AOT_NAMES_DUMP.txt'
+page = requests.get(url)
+
+
+string = clean_up(page.text)
+
+
+_ID, _name = Usernames(string)
+
+print(_ID)
+print(_name)
+
+for key, val in origin_dict.items():
+    if _ID not in key:
+        
+
+
+
 
 print(f"final product: {origin_dict}")
 
 save_to_file()
 
-#Names = True
-#while Names is True:
-#    print(f"Program running....")
+
+
