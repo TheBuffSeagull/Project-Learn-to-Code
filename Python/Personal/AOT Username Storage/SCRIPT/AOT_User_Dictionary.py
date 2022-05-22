@@ -147,8 +147,7 @@ while Active:
             Active = False
 
         if string in dictionary_data:
-            if len(origin_dict) > 1:   
-                print(dictionary_data[string])
+            print(dictionary_data[string])
         
 
 
