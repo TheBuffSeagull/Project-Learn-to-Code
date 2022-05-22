@@ -55,9 +55,7 @@ def save_to_file():
 
 def set_key(dictionary, key, value):
     """Creates dictionary without overwriting key terms"""
-    print(f"The keys are: {key}")
-    print(f"The values are: {value}")
-    if value not in dictionary.values():
+    if key and value not in dictionary: 
         if key not in dictionary:
             dictionary[key] = value
         if type(dictionary[key]) == list:
@@ -65,6 +63,10 @@ def set_key(dictionary, key, value):
         else:
             dictionary[key] = [dictionary[key], value]
 
+def remove_dups(dictionary):
+    """Making this bitch a tuple to remove the duplicates before saving"""
+    list = [(k, v) for k, v in dictionary.items()]
+    print("Making the dictionary into a tuple to remove duplicates...")
 
 
 #make dictionary
@@ -76,7 +78,6 @@ except:
     print("no inital dictionary")
 
 
-
 string = read_github()
 
 user_IDS, user_names = Usernames(string)
@@ -84,7 +85,10 @@ user_IDS, user_names = Usernames(string)
 for _ID, _name in zip(user_IDS, user_names):
     set_key(origin_dict, _ID, _name)
 
+
 print(f"final product: {origin_dict}")
+
+set(origin_dict)
 
 
 save_to_file()
