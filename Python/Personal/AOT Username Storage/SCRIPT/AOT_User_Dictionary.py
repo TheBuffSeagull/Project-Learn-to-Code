@@ -55,8 +55,9 @@ def read_from_file():
        # reconstructing the data as a dictionary
 
         print("Reconstructing as dictionary: ", type(main_dictionary))
+        print(f"File currently has {len(main_dictionary)} values.\n")
     
-        pprint.pprint(main_dictionary)
+        #pprint.pprint(main_dictionary)
 
     except:
         print("Something went wrong...")
@@ -113,11 +114,19 @@ def update_USERNAMES():
         if len(user_ID) > 1:
             pprint.pprint(origin_dict)
         
-        print(f"File currently has {len(origin_dict)} values.\n")
 
         return origin_dict
         
     except Exception as e: print(e)
+
+def remove_badID(input):
+    data = read_from_file()
+    if input in data:
+        del data[input]
+        with open("USERNAMES.txt", "w") as f_w:
+            f_w.write(json.dumps(data))
+        read_from_file()
+    
 
 origin_dict = {}
 used_list = []
@@ -131,26 +140,35 @@ dictionary_data = read_from_file()
 
 Active = True
 
+#Main interactive while loop
 while Active:
 
-        string = input("Type an AOT User ID, 'update', 'all', or 'exit': ")
+        string = input("Type an AOT User ID, 'update', 'remove', 'all', or 'exit': ")
 
         if string == "all":
             try:
                 pprint.pprint(dictionary_data)
             except Exception as e: print(e)
         
-        if string == "update":
+        elif string == "update":
             try:
-                update_USERNAMES()
-                save_to_file(origin_dict)
+                origin_dict = update_USERNAMES()
+                dictionary_data = read_from_file()
             except Exception as e: print(e)
 
+        elif string == "remove":
+            try:  
+                badID = input("Enter ID to remove: ")        
+                remove_badID(badID)
+            except Exception as e: print(e)
+            
         elif string == "exit":
             Active = False
 
-        if string in dictionary_data:
-            print(dictionary_data[string])
+        elif string in dictionary_data or origin_dict:
+            try:
+                print(dictionary_data[string])
+            except Exception as e: print(e)
         
 
 
