@@ -25,7 +25,7 @@ def save_to_file(final):
     with open('USERNAMES.txt') as f:
         data = f.read()
     
-    print("Grabbing main dictionary from file as str: ", type(data))
+    print("Grabbing main dictionary from save file as str: ", type(data))
     #place holder if nothing in file
     main_dictionary = {}
     # reconstructing the data as a dictionary
@@ -35,20 +35,40 @@ def save_to_file(final):
 
         print("Reconstructing as dictionary: ", type(main_dictionary))
 
-        print("Merging new data to primary save file...")
     except:
         print("No data in main dictionary...") 
 
     # reconstructing the data as a dictionary
 
-    print("Saving new file...")
+    print("Saving new entries from paste file...")
     save_file = main_dictionary | final
 
     with open("USERNAMES.txt", "w") as f_w:
         f_w.write(json.dumps(save_file))
 
+def read_from_file():
+    # reading the data from the file
+    with open('USERNAMES.txt') as f:
+        data = f.read()
+    
+    print("Grabbing main dictionary from file as str: ", type(data))
+    #place holder if nothing in file
+    main_dictionary = {}
+    # reconstructing the data as a dictionary
+    try:
+        main_dictionary = json.loads(data) 
+       # reconstructing the data as a dictionary
 
-    print(f"File currently has {len(save_file)} values.\n\n\n")
+        print("Reconstructing as dictionary: ", type(main_dictionary))
+    
+        pprint.pprint(main_dictionary)
+
+    except:
+        print("Something went wrong...")
+
+    print(f"File currently has {len(main_dictionary)} values.\n")
+    return main_dictionary
+
 
 def read_paste_file():
     with open('PASTE_DOC.txt', 'r') as f:
@@ -82,17 +102,16 @@ def merge(list1, list2):
 origin_dict = {}
 used_list = []
 
-Active = True
 
-
+#Try on open to read paste file and then clear the contents
 try:
     edit = read_paste_file()
     _edit = clean_up(edit)
 
     user_name = re.findall('"([^"]*)"', _edit) 
     user_ID = re.findall(r'\s\[(\w+)\]', _edit)
-
-    print(f"Found {user_name} with ID {user_ID}\n")
+    if len(user_ID) > 1:
+        print(f"Found {user_name} with ID {user_ID}\n")
                     
     import_data = merge(user_ID, user_name)
 
@@ -103,69 +122,35 @@ try:
             origin_dict[_id].append(_name)
             used_list.append(_name)
 
-    pprint.pprint(origin_dict)
+    if len(user_ID) > 1:
+        pprint.pprint(origin_dict)
+    
 except Exception as e: print(e)
 
 
-while Active: 
-    string = input("Type an ID, 'all', or 'exit': ")
+dictionary_data = read_from_file()
 
-    if string == "add":
-        edit_mode = True
-        while edit_mode:
-            edit = input("'import' or 'save': ")
-            if edit == "import":
-                try:
-                    edit = read_paste_file()
-                    _edit = clean_up(edit)
+save_to_file(origin_dict)
 
-                    user_name = re.findall('"([^"]*)"', _edit) 
-                    user_ID = re.findall(r'\s\[(\w+)\]', _edit)
+Active = True
 
-                    print(f"Found {user_name} with ID {user_ID}\n")
-                    
-                    import_data = merge(user_ID, user_name)
+while Active:
 
-                    for _id, _name in import_data:
-                        if _id not in origin_dict:
-                            origin_dict[_id] = list()       
-                        if _name not in used_list:
-                            origin_dict[_id].append(_name)
-                            used_list.append(_name)
+        string = input("Type an AOT User ID, 'all', or 'exit': ")
 
-                    pprint.pprint(origin_dict)
-                except Exception as e: print(e)
+        if string == "all":
+            try:
+                pprint.pprint(dictionary_data)
+            except Exception as e: print(e)
+
+        elif string == "exit":
+            Active = False
+
+        if string in dictionary_data:
+            if len(origin_dict) > 1:   
+                print(dictionary_data[string])
+        
+
+
+
             
-            #creating an exit
-            if edit == "save":
-                cls()
-                save_to_file(origin_dict)
-                edit_mode = False
-                break
-
-
-    if string == "search":
-        lookup_mode = True
-        while lookup_mode:
-            lookup = input("Please enter the User's ID, type 'all', or 'back': ")
-            if lookup == "back":
-                lookup_mode = False
-                cls()
-            
-            elif lookup == "all":
-                try:
-                    with open('USERNAMES.txt') as f:
-                        dictionary_data = f.read()
-                        pprint.pprint(dictionary_data)
-                except:
-                    print("No data")
-            else:
-                try:
-                    with open('USERNAMES.txt') as f:
-                        dictionary_data = f.read()
-                        pprint.pprint(dictionary_data.get(lookup))
-                except:
-                    print("No data")
-
-    if string == "exit":
-        Active = False
