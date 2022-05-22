@@ -1,3 +1,4 @@
+from turtle import clear
 import requests
 import re
 import json
@@ -10,22 +11,14 @@ idlist = {}
 
 def clean_up(paste):
     """cleans off the bullshit from the init paste"""
+    print('Clean up results:\n')
     cleaning_front = paste.replace('<indent=2%>', '')
     cleaning_back = cleaning_front.replace('</indent>', '')
     final_cleaned_up_version = cleaning_back.replace('<color="orange">[YOU]</color>', '')
     print(final_cleaned_up_version)
 
-    print('MADE IT THROUGH CLEAN UP\n')
     return final_cleaned_up_version
 
-def Usernames(ids):
-    """Pulls all of the information out of the brackets"""
-    print('Made it to dictionary')
-    
-    # no idea why this works just dont fucking touch it... SERIOUSLY. 
-    user_names = re.findall('"([^"]*)"', ids) 
-    user_IDS = re.findall(r'\s\[(\w+)\]', ids)
-    return user_IDS, user_names
 
 def read_file():
     # reading the data from the file
@@ -46,50 +39,63 @@ def read_github():
     url = 'https://raw.githubusercontent.com/TheBuffSeagull/Project-Learn-to-Code/master/Python/Personal/AOT%20Username%20Storage/AOT_NAMES_DUMP.txt'
     page = requests.get(url)
 
-    return clean_up(page.text)
+    return page.text
 
 def save_to_file():
     with open("USERNAMES.txt", "w") as file:
         file.write(json.dumps(origin_dict))
-        print(f"File edited with {origin_dict}.")
+        print(f"File edited with {origin_dict}.\n\n\n")
 
-def set_key(dictionary, key, value):
-    """Creates dictionary without overwriting key terms"""
-    if key and value not in dictionary: 
-        if key not in dictionary:
-            dictionary[key] = value
-        if type(dictionary[key]) == list:
-            dictionary[key].append(value)
-        else:
-            dictionary[key] = [dictionary[key], value]
+def list_dup_removal(input_list):
+    # using naive method
+    # to remove duplicated 
+    # from list 
+    res = []
+    for i in input_list:
+        if i not in res:
+            res.append(i)
 
-def remove_dups(dictionary):
-    """Making this bitch a tuple to remove the duplicates before saving"""
-    list = [(k, v) for k, v in dictionary.items()]
-    print("Making the dictionary into a tuple to remove duplicates...")
+    print(res)
+    return res
 
 
 #make dictionary
-origin_dict = dict()
-#try to pull if one already exists
+origin_dict = {}
+
 try:
     origin_dict = read_file()
 except:
     print("no inital dictionary")
 
 
-string = read_github()
+carrier = clean_up(input("Copy into Storage: "))
 
-user_IDS, user_names = Usernames(string)
+string = carrier.split('\n')
 
-for _ID, _name in zip(user_IDS, user_names):
-    set_key(origin_dict, _ID, _name)
+list_dup_removal(string)
 
 
-print(f"final product: {origin_dict}")
 
-set(origin_dict)
+print(f"Printing string: {string}\n\n\n")
 
+for line in string:
+    user_name = re.findall('"([^"]*)"', line) 
+    user_ID = re.findall(r'\s\[(\w+)\]', line)
+
+    print(f"Found {user_name} with ID {user_ID}\n")
+    #make lists to tuples to avoid error
+    
+    _name = "".join(user_name)
+    _id = "".join(user_ID)
+
+    print(f"Joining {_id} and {_name}")
+
+    if _id not in origin_dict:
+        origin_dict[_id] = list()
+    origin_dict[_id].append(_name)
+
+
+print(f"final product: {origin_dict}\n\n\n")
 
 save_to_file()
 
