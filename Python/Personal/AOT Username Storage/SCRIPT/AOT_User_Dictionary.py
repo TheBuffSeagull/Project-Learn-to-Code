@@ -2,13 +2,9 @@ from rich import print
 import pprint
 import re
 import json
-import os
+
 
 #this is attempt two cause I said fuck it and started over
-
-
-def cls():
-    os.system('cls' if os.name=='nt' else 'clear')
 
 
 def clean_up(paste):
@@ -18,7 +14,6 @@ def clean_up(paste):
     final_cleaned_up_version = cleaning_back.replace('<color="orange">[YOU]</color>', '')
 
     return final_cleaned_up_version
-
 
 def save_to_file(final):
     # reading the data from the file
@@ -66,16 +61,13 @@ def read_from_file():
     except:
         print("Something went wrong...")
 
-    print(f"File currently has {len(main_dictionary)} values.\n")
     return main_dictionary
-
 
 def read_paste_file():
     with open('PASTE_DOC.txt', 'r') as f:
         data = f.read()
         print("Grabbing paste data from file as str: ", type(data))
         return data
-
 
 def merge(list1, list2):
       
@@ -98,49 +90,60 @@ def merge(list1, list2):
             break
     return merged_list
 
+def update_USERNAMES():  
+    #Try on open to read paste file and then clear the contents
+    try:
+        edit = read_paste_file()
+        _edit = clean_up(edit)
+
+        user_name = re.findall('"([^"]*)"', _edit) 
+        user_ID = re.findall(r'\s\[(\w+)\]', _edit)
+        if len(user_ID) > 1:
+            print(f"Found {user_name} with ID {user_ID}\n")
+                        
+        import_data = merge(user_ID, user_name)
+
+        for _id, _name in import_data:
+            if _id not in origin_dict:
+                origin_dict[_id] = list()       
+            if _name not in used_list:
+                origin_dict[_id].append(_name)
+                used_list.append(_name)
+
+        if len(user_ID) > 1:
+            pprint.pprint(origin_dict)
+        
+        print(f"File currently has {len(origin_dict)} values.\n")
+
+        return origin_dict
+        
+    except Exception as e: print(e)
 
 origin_dict = {}
 used_list = []
 
 
-#Try on open to read paste file and then clear the contents
-try:
-    edit = read_paste_file()
-    _edit = clean_up(edit)
-
-    user_name = re.findall('"([^"]*)"', _edit) 
-    user_ID = re.findall(r'\s\[(\w+)\]', _edit)
-    if len(user_ID) > 1:
-        print(f"Found {user_name} with ID {user_ID}\n")
-                    
-    import_data = merge(user_ID, user_name)
-
-    for _id, _name in import_data:
-        if _id not in origin_dict:
-            origin_dict[_id] = list()       
-        if _name not in used_list:
-            origin_dict[_id].append(_name)
-            used_list.append(_name)
-
-    if len(user_ID) > 1:
-        pprint.pprint(origin_dict)
-    
-except Exception as e: print(e)
-
-
-dictionary_data = read_from_file()
+origin_dict = update_USERNAMES()
 
 save_to_file(origin_dict)
+
+dictionary_data = read_from_file()
 
 Active = True
 
 while Active:
 
-        string = input("Type an AOT User ID, 'all', or 'exit': ")
+        string = input("Type an AOT User ID, 'update', 'all', or 'exit': ")
 
         if string == "all":
             try:
                 pprint.pprint(dictionary_data)
+            except Exception as e: print(e)
+        
+        if string == "update":
+            try:
+                update_USERNAMES()
+                save_to_file(origin_dict)
             except Exception as e: print(e)
 
         elif string == "exit":
