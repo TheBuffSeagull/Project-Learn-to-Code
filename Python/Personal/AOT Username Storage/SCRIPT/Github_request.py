@@ -3,11 +3,6 @@ import re
 import json
 import os
 
-#update repo for most up to date file
-import git 
-
-g = git.cmd.Git(git_dir)
-g.pull()
 
 
 origin_dict = {}
@@ -62,6 +57,7 @@ def save_to_file():
 url = 'https://raw.githubusercontent.com/TheBuffSeagull/Project-Learn-to-Code/master/Python/Personal/AOT%20Username%20Storage/AOT_NAMES_DUMP.txt'
 page = requests.get(url)
 
+
 string = clean_up(page.text)
 
 user_IDS, user_names = ids_for_usernames(string)
@@ -73,7 +69,7 @@ idlist = {user_IDS[i]: user_names[i] for i in range(len(user_IDS))}
 
 
 print(idlist)
-print(origin_dict)
+print(f"current orgin dictionary: {origin_dict}")
 
 # reading the data from the file
 with open('USERNAMES.txt', "r") as f:
@@ -89,8 +85,16 @@ with open('USERNAMES.txt', "r") as f:
     print(js)
     origin_dict = js
 
+print(f"Fusing Dictionaries....")
 
-origin_dict.update(idlist)
+for user_IDS, user_names in origin_dict:
+    if user_IDS in origin_dict:
+        for key,val in to_add.items():
+            if key in d:
+                d[key] = [d[key],val]
+    
+
+print(f"final product: {origin_dict}")
 
 save_to_file()
 
