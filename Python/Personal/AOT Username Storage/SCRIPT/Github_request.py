@@ -1,15 +1,12 @@
 import requests
 import re
 import json
-import os
 
 
-origin_dict = {}
+
+
 idlist = {}
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
-
-print(f"Current working directory is: {dir_path}")
 
 def clean_up(paste):
     """cleans off the bullshit from the init paste"""
@@ -28,9 +25,7 @@ def Usernames(ids):
     # no idea why this works just dont fucking touch it... SERIOUSLY. 
     user_names = re.findall('"([^"]*)"', ids) 
     user_IDS = re.findall(r'\s\[(\w+)\]', ids)
-    for _name in user_names:
-        for _ID in user_IDS:
-            return _name, _ID
+    return user_IDS, user_names
 
 def read_file():
     # reading the data from the file
@@ -45,52 +40,52 @@ def read_file():
     
         print("Data type after reconstruction : ", type(js))
         print(js)
+        return js
+
+def read_github():
+    url = 'https://raw.githubusercontent.com/TheBuffSeagull/Project-Learn-to-Code/master/Python/Personal/AOT%20Username%20Storage/AOT_NAMES_DUMP.txt'
+    page = requests.get(url)
+
+    return clean_up(page.text)
 
 def save_to_file():
     with open("USERNAMES.txt", "w") as file:
-        file.write('\n')
         file.write(json.dumps(origin_dict))
         print(f"File edited with {origin_dict}.")
 
+def set_key(dictionary, key, value):
+    """Creates dictionary without overwriting key terms"""
+    print(f"The keys are: {key}")
+    print(f"The values are: {value}")
+    if value not in dictionary.values():
+        if key not in dictionary:
+            dictionary[key] = value
+        if type(dictionary[key]) == list:
+            dictionary[key].append(value)
+        else:
+            dictionary[key] = [dictionary[key], value]
 
 
 
-
-# reading the data from the file
-with open('USERNAMES.txt', "r") as f:
-    data = f.read()
-
-  
-    print("Data type before reconstruction : ", type(data))
-        
-    # reconstructing the data as a dictionary
-    js = json.loads(data)
-    
-    print("Data type after reconstruction : ", type(js))
-    print(js)
-    origin_dict = js
-
-
-url = 'https://raw.githubusercontent.com/TheBuffSeagull/Project-Learn-to-Code/master/Python/Personal/AOT%20Username%20Storage/AOT_NAMES_DUMP.txt'
-page = requests.get(url)
-
-
-string = clean_up(page.text)
-
-
-_ID, _name = Usernames(string)
-
-print(_ID)
-print(_name)
-
-for key, val in origin_dict.items():
-    if _ID not in key:
-        
+#make dictionary
+origin_dict = dict()
+#try to pull if one already exists
+try:
+    origin_dict = read_file()
+except:
+    print("no inital dictionary")
 
 
 
+string = read_github()
+
+user_IDS, user_names = Usernames(string)
+
+for _ID, _name in zip(user_IDS, user_names):
+    set_key(origin_dict, _ID, _name)
 
 print(f"final product: {origin_dict}")
+
 
 save_to_file()
 
