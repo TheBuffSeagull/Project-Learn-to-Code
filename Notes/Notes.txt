@@ -1,0 +1,4 @@
+How to make an .exe out of python file
+    1. go to file
+    2. type cmd in explorer bar or navigate to folder with python file in cmd
+    3. pyinstaller --onefile (-w if you dont want console) "file-name"
