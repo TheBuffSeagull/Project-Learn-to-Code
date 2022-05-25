@@ -6,10 +6,10 @@ import json
 import os
 
 
-def get_paste_doc():  
+def get_paste():  
     #Try on open to read paste file and then clear the contents
-    with open('PASTE_DOC.txt', 'r') as f:
-        data = f.read()
+    
+        data = input("Please paste new data into window: ")
         print("Grabbing paste data from file as str: ", type(data))
 
         #SPECIFYING THESE BEFORE CLEANING TO AVOID BAD BRACKETS BEING ADDED LIKE HOST DATA NUMBERS Ex: '[01] -'
@@ -32,10 +32,9 @@ def get_paste_doc():
                 Dictionary[_id] = list()       
             
             #seen list is making it so that you can't have two people with the same name
-            if _name not in seen_list:
+            if _name:
                 Dictionary[_id].append(_name)
                 #add name to seen list after adding
-                seen_list.append(_name)
 
             if len(user_ID) > 1:
                 pprint.pprint(Dictionary)
@@ -81,7 +80,7 @@ with open("NAME_STORAGE.txt", "r+") as file:
     #seen list is to prevent duplicates
     seen_list = []
     #look for new entries from paste_DOC to add to dictionary before checking if empty
-    paste_doc = get_paste_doc()
+    paste_doc = get_paste()
     Dictionary = Dictionary | paste_doc
 
     #using this to skip json.loads if no data
@@ -94,8 +93,10 @@ with open("NAME_STORAGE.txt", "r+") as file:
     else:
         print("Error: There is no file data.")
     
-    #Print dictionary to console
-    pprint.pprint(Dictionary)
+    
+    #Print dictionary to Name_STORAGE.txt
+    pprint.pprint(Dictionary, file)
+    print("Expecting Dictionary for writing file: ", type(Dictionary))
     #get current number of entries
     print(f"File currently has {len(Dictionary)} values.\n")
 

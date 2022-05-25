@@ -118,7 +118,7 @@
 <indent=2%>"[es]Salty" <color="orange">[YOU]</color> [000267480fc14fd2833452fd73da2a26]</indent>
 <indent=2%>"Tshir0"  [0002e68613004960a0fd82c81a29df1d]</indent>
 <indent=2%>"Hawk"  [00023549b8de43efa0cd4a3b424a6a21]</indent>
-<indent=2%>"[VGBD]Purifice"  [0002b479e2f3439aac29734fa1e7ae79]</indent>
+
 
 
 
