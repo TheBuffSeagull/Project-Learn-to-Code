@@ -21,15 +21,11 @@ def get_paste_doc():
         #replacing personal color
         data = cleaning_back.replace('<color="orange">[YOU]</color>', '')
 
-        print(f"Current step data: {data}")
-
-        
         if len(user_ID) > 1:
             print(f"Found {user_name} with ID {user_ID}\n")
                             
         data = merge(user_ID, user_name)
 
-        print(data)
 
         for _id, _name in data:
             if _id not in Dictionary:
