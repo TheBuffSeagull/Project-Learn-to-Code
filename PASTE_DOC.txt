@@ -103,7 +103,6 @@
 <indent=2%>"Rookie52-BOT"  [0002bd2c38944e1e92938ac4e41ce605]</indent>
 <indent=2%>"Trainee_01"  [0002f656495b4152b7ecc5a50a76b999]</indent>
 <indent=2%>"[es]auxitt"  [0002392a3f3e4bef81ed2ed246421d0c]</indent>
-<indent=2%>"[pawg]steqano"  [0002dc89fbd941ccb4e00e4ddf13418a]</indent>
 <indent=2%>"Sullivan_Brown"  [0002a37541714a899b62f10118613bdd]</indent>
 <indent=2%>"globen"  [0002c4131dd44287872dfcbef6291b39]</indent>
 <indent=2%>"DasMeowHaus"  [00020e7015e24e1b8339198b1d11de75]</indent>
