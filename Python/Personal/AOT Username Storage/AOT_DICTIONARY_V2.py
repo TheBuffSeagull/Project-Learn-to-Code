@@ -17,13 +17,10 @@ def get_paste(data):
     user_name = re.findall('"([^"]*)"', data) 
     user_ID = re.findall(r'\s\[(\w+)\]', data)
     
-    data = data.replace('<indent=2%>', '')
-    data = data.replace('</indent>', '\n')
 
 
     data = merge(user_ID, user_name)
     #maybe turn data into set to avoid duplicatesa
-    print(f'Data ftom function: {data}')
 
 
 
@@ -58,21 +55,19 @@ Path('NAME_STORAGE.txt').touch(exist_ok=True)
 with open("NAME_STORAGE.txt", "r+") as file:
     data = file.read()
 
-    print("Grabbing main dictionary from file. Expecting str: ", type(data))
 
     #place holder if nothing in file
-    Dictionary = {}
+    Dictionary = {} 
     paste_doc = {}
  
     try:
         #using json.loads to convert file to dictionary
         Dictionary = json.loads(data)
-        print("Converting back to Dictionary. Expecting Dictionary: ", type(Dictionary))
         
     #sometimes if file empty we get an exception
     except Exception as e: print(e)
 
-
+    #main user experience
     Active = True
     while Active:
         
@@ -88,6 +83,7 @@ with open("NAME_STORAGE.txt", "r+") as file:
                     #save current stage in case someone closes the program without typing exit
                     try:
                         #merging current updated dictionary and paste entries dictionary
+                        #already added to dictionary. Might not be needed
                         Dictionary = Dictionary | paste_doc
                     except Exception as e: print(e)
 
@@ -106,11 +102,8 @@ with open("NAME_STORAGE.txt", "r+") as file:
                 
                 #look for new entries from user paste
                 paste_doc = get_paste(paste_input)
-                print(f'Data ftom paste_doc function: {paste_doc}')
 
                 paste_doc = set(paste_doc)
-                print("Expecting Set: ", type(paste_doc))
-                print(f'Data ftom set: {paste_doc}')
 
                 for _id, _name in paste_doc:
                     if _id not in Dictionary.keys():
@@ -177,11 +170,5 @@ with open("NAME_STORAGE.txt", "r+") as file:
     file.write(json.dumps(Dictionary))
     #truncate makes sure the file is now the size of "Dictionary" (sometimes old stuff was left behind)
     file.truncate()
-    #get current number of entries
-    print(f"File has updated to have {len(Dictionary)} values.\n")
-
-
-        
-
 
 
