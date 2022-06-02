@@ -14,8 +14,8 @@ def add_data(data, Dictionary):
         if _name not in Dictionary.get(_id):
             Dictionary[_id].append(_name)
             #Telling the user about new entries cause its fun
-            print(f"Adding {_name} to ID: {_id}")
-    
+            print(f"{_id} joined with name: {_name}\n{_id} has used {(Dictionary[_id])}")
+
     #move back to first line of file
     file.seek(0)
     #Write dictionary to Name_STORAGE.txt 
