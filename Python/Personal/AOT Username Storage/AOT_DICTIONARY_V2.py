@@ -23,50 +23,106 @@ def add_data(data, Dictionary):
     file.write(json.dumps(Dictionary))
     #truncate makes sure the file is now the size of "Dictionary" (sometimes old stuff was left behind)
     file.truncate()
-    #get current number of entries
 
-
-
-def get_chatlog(Dictionary):
-    """Gets the chatlog history if user has enabled logging"""
-    #placeholders
-
-    data = []
-    #getts user name
-    Windows_user = os.getlogin()
-    #finds chatlogs with windows username
-    directory = rf"C:\Users\{Windows_user}\AppData\LocalLow\RoarkInc\raot\chatlogs"
-
-    with open(f"{directory}\chatlog.txt", 'r', encoding="utf8") as chatlog:
-        
-        #reading chatlog and saving data as chatlog >_> I'm lazy with names
-        chatlog = chatlog.readlines()
-        
-        for lns in chatlog:
-            if lns.startswith('User'):
-                data.append(lns)
-
-        for ln in data:
-            #Clean up lines
-            ln = ln.replace('Username: ', '')
-            ln = ln.replace(' Id: ', '')
-            ln = ln.replace('\n', '')
-            ln = ln.replace(' ', '')
-            items = ln.split('|')
-            items.reverse()
-
-            _id = items[0::2]
-            _name = items[1::2]
-
-
-
-            items = merge(_id, _name)
-
-            add_data(items, Dictionary)
+def add_history(data, Dictionary):
+    """Adds history data to Dictionary. It requires the data be a list with _ID 1st and _name 2nd"""
     
+    for _id, _name in data:
+        if _id not in Dictionary.keys():
+            Dictionary[_id] = list()      
+        if _name not in Dictionary.get(_id):
+            Dictionary[_id].append(_name)
+            #Telling the user about new entries cause its fun
+            print(f"{_id} found in history with name: {_name}\n{_id} has used {(Dictionary[_id])}")
+
+    #move back to first line of file
+    file.seek(0)
+    #Write dictionary to Name_STORAGE.txt 
+    # (dumps makes dictionary to str cause you can't write DICT to file)
+    file.write(json.dumps(Dictionary))
+    #truncate makes sure the file is now the size of "Dictionary" (sometimes old stuff was left behind)
+    file.truncate()
+
+def get_history(Dictionary):
+    """Gets the chatlog history if user has enabled logging""" 
+    try:
+        #placeholders
+        data = []
+        #getts user name
+        Windows_user = os.getlogin()
+
+        #finds chatlogs with windows username
+        directory = rf"C:\Users\{Windows_user}\AppData\LocalLow\RoarkInc\raot\chatlogs\history"
+
+        for filename in os.listdir(directory):
+        #this one is fine... Don't touch it
+            with open(f"{directory}\{filename}", 'r', encoding="utf8") as chatlog:
+                #reading chatlog\history files and saving data as chatlog >_> I'm lazy with names
+                chatlog = chatlog.readlines()
+                
+                for lns in chatlog:
+                    if lns.startswith('User'):
+                        data.append(lns)
+
+                for ln in data:
+                    #Clean up lines
+                    ln = ln.replace('Username: ', '')
+                    ln = ln.replace(' Id: ', '')
+                    ln = ln.replace('\n', '')
+                    ln = ln.replace(' ', '')
+                    items = ln.split('|')
+                    items.reverse()
+
+                    _id = items[0::2]
+                    _name = items[1::2]
 
 
 
+                    items = merge(_id, _name)
+
+                    add_history(items, Dictionary)
+    #we get exceptions if the file doesn't exist so we stopping that
+    except Exception as e: print(e)                
+    
+def get_chatlog(Dictionary):
+    """Gets the chatlog if user has enabled logging""" 
+    try:
+        #placeholders
+        data = []
+        #getts user name
+        Windows_user = os.getlogin()
+
+        #finds chatlogs with windows username
+        directory = rf"C:\Users\{Windows_user}\AppData\LocalLow\RoarkInc\raot\chatlogs"
+
+        #this one is fine... Don't touch it
+        with open(f"{directory}\chatlog.txt", 'r', encoding="utf8") as chatlog:
+            #reading chatlog\history files and saving data as chatlog >_> I'm lazy with names
+            chatlog = chatlog.readlines()
+            
+            for lns in chatlog:
+                if lns.startswith('User'):
+                    data.append(lns)
+
+            for ln in data:
+                #Clean up lines
+                ln = ln.replace('Username: ', '')
+                ln = ln.replace(' Id: ', '')
+                ln = ln.replace('\n', '')
+                ln = ln.replace(' ', '')
+                items = ln.split('|')
+                items.reverse()
+
+                _id = items[0::2]
+                _name = items[1::2]
+
+
+
+                items = merge(_id, _name)
+
+                add_data(items, Dictionary)
+    #we get exceptions if the file doesn't exist so we stopping that
+    except Exception as e: print(e)
 
 def get_paste(data):  
     """TAKES AOT USER PASTE AND MAKES IT USABLE AS DICTIONARY."""
@@ -130,6 +186,9 @@ with open("NAME_STORAGE.txt", "r+") as file:
     #sometimes if file empty we get an exception
     except Exception as e: print(e)
 
+    #get history before starting
+    get_history(Dictionary)
+   
     #main user experience
     Active = True
     while Active:
@@ -181,6 +240,9 @@ with open("NAME_STORAGE.txt", "r+") as file:
             print("Host mode enabled. Press ctrl-c to stop: ")
             try:
                 while True:
+                    #first we pull the history files
+                    get_history(Dictionary)
+                    #then we pull the new chatlog (order of operations my dude)
                     get_chatlog(Dictionary)
             except KeyboardInterrupt:
                 pass
