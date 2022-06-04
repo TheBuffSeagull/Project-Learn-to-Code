@@ -4,17 +4,34 @@ import pprint
 import re
 import json
 import os
+from pydub import AudioSegment
+from pydub.playback import play
+
+def is_Trainee(Trainee):
+    """"Checks for Trainee's before adding _name"""
+    if re.match("^Trainee(_\d\d)?$", Trainee):
+        return True
+    else:
+        return False
 
 def add_data(data, Dictionary):
     """Adds incoming data to Dictionary. It requires the data be a list with _ID 1st and _name 2nd"""
     
     for _id, _name in data:
+        #ID process
         if _id not in Dictionary.keys():
             Dictionary[_id] = list()      
+
+       #Name Process
         if _name not in Dictionary.get(_id):
             Dictionary[_id].append(_name)
             #Telling the user about new entries cause its fun
             print(f"{_id} joined with name: {_name}\n{_id} has used {(Dictionary[_id])}")
+
+            
+        
+
+
 
     #move back to first line of file
     file.seek(0)
@@ -26,14 +43,17 @@ def add_data(data, Dictionary):
 
 def add_history(data, Dictionary):
     """Adds history data to Dictionary. It requires the data be a list with _ID 1st and _name 2nd"""
-    
     for _id, _name in data:
+        #ID process
         if _id not in Dictionary.keys():
-            Dictionary[_id] = list()      
+            Dictionary[_id] = list()
+
+       #Name Process
         if _name not in Dictionary.get(_id):
             Dictionary[_id].append(_name)
             #Telling the user about new entries cause its fun
-            print(f"{_id} found in history with name: {_name}\n{_id} has used {(Dictionary[_id])}")
+            print(f"{_id} found with name: {_name}\n{_id} has used {(Dictionary[_id])}")
+
 
     #move back to first line of file
     file.seek(0)
@@ -210,9 +230,7 @@ with open("NAME_STORAGE.txt", "r+") as file:
 
                 add_data(paste_doc, Dictionary)
                 
-
-
-        
+ 
         if user_input == "remove":
             while True:
                 try:
@@ -240,9 +258,7 @@ with open("NAME_STORAGE.txt", "r+") as file:
             print("Host mode enabled. Press ctrl-c to stop: ")
             try:
                 while True:
-                    #first we pull the history files
-                    get_history(Dictionary)
-                    #then we pull the new chatlog (order of operations my dude)
+                    #we pull the new chatlog (order of operations my dude)
                     get_chatlog(Dictionary)
             except KeyboardInterrupt:
                 pass
