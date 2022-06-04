@@ -4,8 +4,6 @@ import pprint
 import re
 import json
 import os
-from pydub import AudioSegment
-from pydub.playback import play
 
 def is_Trainee(Trainee):
     """"Checks for Trainee's before adding _name"""
