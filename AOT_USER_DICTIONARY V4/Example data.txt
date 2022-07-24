@@ -1,0 +1,9 @@
+<indent=2%>"Rookie52-BOT"  [0002bd2c38944e1e92938ac4e41ce605]</indent>
+<indent=2%>"[FR]Lukesnake17"  [0002b44b2f8f4dd98b87059ad5774c34]</indent>
+<indent=2%>"Reverse[IMG]"  [0002df7ec4d94de0a1701f891c28bf2a]</indent>
+<indent=2%>"Krayto"  [0002fe8d5ad543c1a43680db6a4c5a9a]</indent>
+<indent=2%>"Trainee"  [000284a44daf4afa91b5e34d83d812a0]</indent>
+<indent=2%>"Trainee_01"  [00020c7b72244e9782eefaf3075b6dab]</indent>
+<indent=2%>"Slayer"  [000257f2eda9453cb79d64a4bca9fbb7]</indent>
+<indent=2%>"Trainee_02"  [0002842b32ee4e05a50f33203d76cb5b]</indent>
+<indent=2%>"ANNIEOF[PAWG]" <color="orange">[YOU]</color> [000206cd80e240809e2ff0a3b0c427a4]</indent>
